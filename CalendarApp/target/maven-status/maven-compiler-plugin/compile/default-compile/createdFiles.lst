@@ -1,0 +1,4 @@
+auth\MenuLogin.class
+auth\MenuRegister.class
+calendarApp\CalendarApp.class
+auth\RegisterApp.class
