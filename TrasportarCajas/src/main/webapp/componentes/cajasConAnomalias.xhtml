@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cajas con anomalias</title>
+    </h:head>
+    <h:body>
+        <h3>Cajas con anomalias</h3>
+
+        <p:dataTable value="#{cajaBean.listaCajasConAnomalias}" var="cajaAnomalias">
+
+            <p:column headerText="Radicado">
+                <h:outputText value="#{cajaAnomalias.radicado}s" />
+            </p:column>
+
+            <p:column headerText="Codigo">
+                <h:outputText value="#{cajaAnomalias.codigo}" />
+            </p:column>
+
+            <p:column headerText="Altura">
+                <h:outputText value="#{cajaAnomalias.altura}" />
+            </p:column>
+
+            <p:column headerText="Peso">
+                <h:outputText value="#{cajaAnomalias.peso}" />
+            </p:column>
+
+            <p:column headerText="Ancho">
+                <h:outputText value="#{cajaAnomalias.ancho}" />
+            </p:column>
+
+            <p:column headerText="Fecha entrada">
+                <h:outputText value="#{cajaAnomalias.fechaEntrada}" />
+            </p:column>
+
+            <p:column headerText="Fecha salida">
+                <h:outputText value="#{cajaAnomalias.fechaSalida}" />
+            </p:column>
+
+            <p:column headerText="Estado">
+                <h:outputText value="#{cajaAnomalias.estado}" />
+            </p:column>
+
+            <p:column headerText="ID">
+                <h:outputText value="#{cajaAnomalias.etiqueta.id}" />
+            </p:column>
+
+            <p:column headerText="Descripción">
+                <h:outputText value="#{cajaAnomalias.etiqueta.descripcion}" />
+            </p:column>
+
+            <p:column headerText="Color">
+                <h:outputText value="#{cajaAnomalias.etiqueta.color}" />
+            </p:column>
+
+        </p:dataTable> 
+    </h:body>
+</html>

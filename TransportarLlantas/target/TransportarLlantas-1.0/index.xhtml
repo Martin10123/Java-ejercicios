@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Transport de llantas</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form class="form">
+
+            <h1 class="titulo_llantas">Transporte de llantas</h1>
+
+            <p:panelGrid columns="2">
+
+                <p:panel header="Agregar una nueva llanta">
+                    <div class="contiene_input">
+                        <p:outputLabel value="Codigo" /> 
+                        <p:inputText autocomplete="off" value="#{llantaBean.llanta.codigo}" /> 
+                    </div>
+                    <div class="contiene_input">
+                        <p:outputLabel value="Radio" />  
+                        <p:inputText autocomplete="off" type="number" value="#{llantaBean.llanta.radio}" /> 
+                    </div>
+                    <div class="contiene_input">
+                        <p:outputLabel value="Peso" />  
+                        <p:inputText autocomplete="off" type="number" value="#{llantaBean.llanta.peso}" /> 
+                    </div>
+                    <div class="contiene_input">
+                        <p:outputLabel value="Ancho" />
+                        <p:inputText autocomplete="off" type="number" value="#{llantaBean.llanta.ancho}" /> 
+                    </div>
+                    <div class="contiene_input">
+                        <h:commandButton actionListener="#{llantaBean.agregarLlantaAPlataformaDistribucion()}" class="boton" value="Agregar llanta" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Plataforma de distribución de llantas">
+                    <p:dataTable class="table text-center" value="#{llantaBean.pilaLlantasPlataformaDistribucion}" var="llantaDeDistribucion">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{llantaDeDistribucion.codigo}" />
+                        </p:column>
+                        <p:column headerText="Radio">
+                            <h:outputText value="#{llantaDeDistribucion.radio}" />
+                        </p:column>
+                        <p:column headerText="Peso">
+                            <h:outputText value="#{llantaDeDistribucion.peso}" />
+                        </p:column>
+                        <p:column headerText="Ancho">
+                            <h:outputText value="#{llantaDeDistribucion.ancho}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <div class="contiene_boton">
+                        <h:commandButton 
+                            actionListener="#{llantaBean.seleccionarLlantaDePlataformaDistribucion()}"
+                            class="boton" 
+                            value="Subir llanta al camión" 
+                            style="width: 50%"
+                            />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Modificar llanta para subir al camión">
+
+                    <div class="mostrar_caja_seleccionada">
+                        <div>
+                            <h3>Codigo:</h3>
+                            <p>#{llantaBean.llantaAModificarParaSubirAlCamion.codigo}</p>
+                        </div>
+                        <div>
+                            <h3>Radio:</h3>
+                            <p>#{llantaBean.llantaAModificarParaSubirAlCamion.radio}</p>
+                        </div>
+                        <div>
+                            <h3>Peso:</h3>
+                            <p>#{llantaBean.llantaAModificarParaSubirAlCamion.peso}</p>
+                        </div>
+                        <div>
+                            <h3>Ancho:</h3>
+                            <p>#{llantaBean.llantaAModificarParaSubirAlCamion.ancho}</p>
+                        </div>
+                    </div>
+
+                    <div class="contiene_input">
+                        <p:outputLabel value="Radicado" /> 
+                        <p:inputText autocomplete="off" value="#{llantaBean.llantaAModificarParaSubirAlCamion.radicado}" /> 
+                    </div>
+                    <div class="contiene_input">
+                        <p:outputLabel value="Fecha entrada" />  
+                        <p:calendar placeholder="2023-06-12"
+                                    value="#{llantaBean.llantaAModificarParaSubirAlCamion.fechaEntrada}" 
+                                    pattern="yyyy-MM-dd" showOn="button" 
+                                    />
+                    </div>
+                    <div class="contiene_input">
+                        <p:outputLabel value="Hora de entrada" />  
+                        <p:datePicker value="#{llantaBean.horaEntradaDate}" timeOnly="true" pattern="HH:mm" />
+                    </div>
+                    <div class="contiene_input">
+                        <h:commandButton actionListener="#{llantaBean.subirLlantaModificadaAlCamion()}" class="boton" value="Modificar llanta" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Llantas en el camión">
+                    <p:dataTable class="table text-center" value="#{llantaBean.pilaLlantasEnElCamion}" var="llantaEnCamion">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{llantaEnCamion.codigo}" />
+                        </p:column>
+                        <p:column headerText="Radicado">
+                            <h:outputText value="#{llantaEnCamion.radicado}" />
+                        </p:column>
+                        <p:column headerText="Fecha de entrada">
+                            <h:outputText value="#{llantaEnCamion.fechaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Hora de entrada">
+                            <h:outputText value="#{llantaEnCamion.horaEntrada}" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <div class="contiene_boton">
+                        <h:commandButton 
+                            actionListener="#{llantaBean.bajaLlantaDelCamion()}"
+                            class="boton" 
+                            value="Bajar llanta a plataforma de aforo" 
+                            style="width: 50%"
+                            />
+                    </div>
+                </p:panel>
+
+            </p:panelGrid>
+
+            <p:panelGrid columns="1">
+                <p:panel header="Llantas en plataforma de aforo">
+                    <p:dataTable class="table text-center" value="#{llantaBean.listaLlantasPlataformaAforo}" var="llantaEnPlataformaDeAforo">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.codigo}" />
+                        </p:column>
+                        <p:column headerText="Radio">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.radio}" />
+                        </p:column>
+                        <p:column headerText="Peso">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.peso}" />
+                        </p:column>
+                        <p:column headerText="Ancho">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.ancho}" />
+                        </p:column>
+                        <p:column headerText="Radicado">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.radicado}" />
+                        </p:column>
+                        <p:column headerText="Fecha de entrada">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.fechaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Hora de entrada">
+                            <h:outputText value="#{llantaEnPlataformaDeAforo.horaSalida}" />
+                        </p:column>
+                        <p:column headerText="Ubicar caja">
+                            <h:commandButton 
+                                actionListener="#{llantaBean.elegirLlantaDePlataformaAforo(llantaEnPlataformaDeAforo, 'Normal')}"
+                                class="boton" 
+                                value="Normal" 
+                                style="width: max-content; padding: 0 0.4rem"
+                                />
+                            <h:commandButton 
+                                actionListener="#{llantaBean.elegirLlantaDePlataformaAforo(llantaEnPlataformaDeAforo, 'Con anomalias')}"
+                                class="boton" 
+                                value="Con anomalias" 
+                                style="width: max-content; padding: 0 0.4rem"
+                                />
+                            <h:commandButton 
+                                actionListener="#{llantaBean.elegirLlantaDePlataformaAforo(llantaEnPlataformaDeAforo, 'Dañada')}"
+                                class="boton" 
+                                value="Dañada" 
+                                style="width: max-content; padding: 0 0.4rem"
+                                />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+                <p:panel header="Modificar etiqueta a llanta dañada o con anomalia">
+                    <div class="mostrar_caja_seleccionada">
+                        <div>
+                            <h3>codigo:</h3>
+                            <p>#{llantaBean.llantaDividirSegunEstado.codigo}</p>
+                        </div>
+                        <div>
+                            <h3>Radicado:</h3>
+                            <p>#{llantaBean.llantaDividirSegunEstado.radicado}</p>
+                        </div>
+                        <div>
+                            <h3>Fecha de entrada: </h3>
+                            <p>#{llantaBean.llantaDividirSegunEstado.fechaEntrada}</p>
+                        </div>
+                        <div>
+                            <h3>Hora de entrada: </h3>
+                            <p>#{llantaBean.llantaDividirSegunEstado.fechaEntrada}</p>
+                        </div>
+                    </div>
+
+                    <div class="contiene_input">
+                        <p:outputLabel value="Fecha de salida" /> 
+                        <p:calendar placeholder="2023-06-12"
+                                    value="#{llantaBean.llantaDividirSegunEstado.fechaSalida}" 
+                                    pattern="yyyy-MM-dd" showOn="button" 
+                                    />
+                    </div>
+                    <div class="contiene_input">
+                        <p:outputLabel value="Hora de salida" />  
+                        <p:datePicker value="#{llantaBean.horaSalidaDate}" timeOnly="true" pattern="HH:mm" />
+                    </div>
+                    
+                    <div class="contiene_input">
+                        <p:outputLabel value="ID (etiqueta)" rendered="#{llantaBean.llantaDividirSegunEstado.estado != 'Normal'}" />  
+                        <p:inputText value="#{llantaBean.etiqueta.id}" rendered="#{llantaBean.llantaDividirSegunEstado.estado != 'Normal'}" />
+                    </div>
+                    
+                    <div class="contiene_input">
+                        <p:outputLabel value="Descripción (etiqueta)" rendered="#{llantaBean.llantaDividirSegunEstado.estado != 'Normal'}" />  
+                        <h:inputTextarea style="resize: none; height: 10rem" value="#{llantaBean.etiqueta.descripcion}" rendered="#{llantaBean.llantaDividirSegunEstado.estado != 'Normal'}" />  
+                    </div>
+
+                    <div class="contiene_input">
+                        <h:commandButton actionListener="#{llantaBean.dividirLlantasSegunEstado()}" class="boton" value="Modificar y clasificar llanta" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Llantas con anomalias">
+                    <p:dataTable class="table text-center" value="#{llantaBean.listaLlantasConAnomalias}" var="llantaConAnomalia">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{llantaConAnomalia.codigo}" />
+                        </p:column>
+                        <p:column headerText="Radio">
+                            <h:outputText value="#{llantaConAnomalia.radio}" />
+                        </p:column>
+                        <p:column headerText="Peso">
+                            <h:outputText value="#{llantaConAnomalia.peso}" />
+                        </p:column>
+                        <p:column headerText="Ancho">
+                            <h:outputText value="#{llantaConAnomalia.ancho}" />
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{llantaConAnomalia.estado}" />
+                        </p:column>
+                        <p:column headerText="Radicado de entrada">
+                            <h:outputText value="#{llantaConAnomalia.radicado}" />
+                        </p:column>
+                        <p:column headerText="Radicado de salida">
+                            <h:outputText value="#{llantaConAnomalia.radicado}S" />
+                        </p:column>
+                        <p:column headerText="Fecha de entrada">
+                            <h:outputText value="#{llantaConAnomalia.fechaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Hora de entrada">
+                            <h:outputText value="#{llantaConAnomalia.horaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Fecha de salida">
+                            <h:outputText value="#{llantaConAnomalia.fechaSalida}" />
+                        </p:column>
+                        <p:column headerText="Hora de salida">
+                            <h:outputText value="#{llantaConAnomalia.horaSalida}" />
+                        </p:column>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{llantaConAnomalia.etiqueta.id}" />
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <h:outputText value="#{llantaConAnomalia.etiqueta.descripcion}" />
+                        </p:column>
+                        <p:column headerText="Color" style="background: orange; color: #fff">
+                            <h:outputText value="#{llantaConAnomalia.etiqueta.color}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+                <p:panel header="Llantas normales">
+                    <p:dataTable class="table text-center" value="#{llantaBean.listaLlantasNormales}" var="llantaNormal">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{llantaNormal.codigo}" />
+                        </p:column>
+                        <p:column headerText="Radio">
+                            <h:outputText value="#{llantaNormal.radio}" />
+                        </p:column>
+                        <p:column headerText="Peso">
+                            <h:outputText value="#{llantaNormal.peso}" />
+                        </p:column>
+                        <p:column headerText="Ancho">
+                            <h:outputText value="#{llantaNormal.ancho}" />
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{llantaNormal.estado}" />
+                        </p:column>
+                        <p:column headerText="Radicado de entrada">
+                            <h:outputText value="#{llantaNormal.radicado}" />
+                        </p:column>
+                        <p:column headerText="Radicado de salida">
+                            <h:outputText value="#{llantaNormal.radicado}S" />
+                        </p:column>
+                        <p:column headerText="Fecha de entrada">
+                            <h:outputText value="#{llantaNormal.fechaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Hora de entrada">
+                            <h:outputText value="#{llantaNormal.horaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Fecha de salida">
+                            <h:outputText value="#{llantaNormal.fechaSalida}" />
+                        </p:column>
+                        <p:column headerText="Hora de salida">
+                            <h:outputText value="#{llantaNormal.horaSalida}" />
+                        </p:column>
+                        <p:column headerText="Color" style="background: lime; color: #fff">
+                            <h:outputText value="#{llantaNormal.etiqueta.color}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+                <p:panel header="Llantas dañadas">
+                    <p:dataTable class="table text-center" value="#{llantaBean.listaLlantasDanadas}" var="llantasDanadas">
+                        <p:column headerText="Codigo">
+                            <h:outputText value="#{llantasDanadas.codigo}" />
+                        </p:column>
+                        <p:column headerText="Radio">
+                            <h:outputText value="#{llantasDanadas.radio}" />
+                        </p:column>
+                        <p:column headerText="Peso">
+                            <h:outputText value="#{llantasDanadas.peso}" />
+                        </p:column>
+                        <p:column headerText="Ancho">
+                            <h:outputText value="#{llantasDanadas.ancho}" />
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{llantasDanadas.estado}" />
+                        </p:column>
+                        <p:column headerText="Radicado de entrada">
+                            <h:outputText value="#{llantasDanadas.radicado}" />
+                        </p:column>
+                        <p:column headerText="Radicado de salida">
+                            <h:outputText value="#{llantasDanadas.radicado}S" />
+                        </p:column>
+                         <p:column headerText="Fecha de entrada">
+                            <h:outputText value="#{llantasDanadas.fechaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Hora de entrada">
+                            <h:outputText value="#{llantasDanadas.horaEntrada}" />
+                        </p:column>
+                        <p:column headerText="Fecha de salida">
+                            <h:outputText value="#{llantasDanadas.fechaSalida}" />
+                        </p:column>
+                        <p:column headerText="Hora de salida">
+                            <h:outputText value="#{llantasDanadas.horaSalida}" />
+                        </p:column>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{llantasDanadas.etiqueta.id}" />
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <h:outputText value="#{llantasDanadas.etiqueta.descripcion}" />
+                        </p:column>
+                        <p:column headerText="Color" style="background: red; color: #fff">
+                            <h:outputText value="#{llantasDanadas.etiqueta.color}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </p:panelGrid>
+        </h:form>
+
+        <p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+    </h:body>
+</html>

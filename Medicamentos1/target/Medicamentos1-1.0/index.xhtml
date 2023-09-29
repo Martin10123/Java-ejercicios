@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <h:head>
+        <title>Facelet Title</title>
+
+        <style>
+            .btn_flotante {
+                position: fixed;
+                bottom: 1rem;
+                right: 1rem;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:panel style="width:40rem;height:30rem;border: none">
+                    <h3>Codigo</h3>
+                    <p:inputText required="true" type="number" style="width: 100%" value="#{medicamentoBean.medicamento.codigo}" />
+
+                    <h3>Nombre</h3>
+                    <p:inputText required="true" type="text" style="width: 100%" value="#{medicamentoBean.medicamento.nombre}" />
+
+                    <h3>Fecha de caducidad</h3>
+                    <p:inputText required="true" type="date" style="width: 100%" value="#{medicamentoBean.medicamento.fechaCaducidad}" />
+
+                    <h3>Forma</h3>
+                    <p:selectOneButton required="true" value="#{medicamentoBean.medicamento.forma}">
+                        <f:selectItem itemLabel="Capsula" itemValue="Capsula"/>
+                        <f:selectItem itemLabel="Liquido" itemValue="Liquido"/>
+                    </p:selectOneButton>
+
+                    <h3>Via de consumo</h3>
+                    <p:selectOneButton required="true" value="#{medicamentoBean.medicamento.viaConsumo}">
+                        <f:selectItem itemLabel="Oral" itemValue="Oral"/>
+                        <f:selectItem itemLabel="Externo" itemValue="Externo"/>
+                    </p:selectOneButton>
+
+                    <h3>Dosis</h3>
+                    <p:inputText required="true" type="number" style="width: 100%" value="#{medicamentoBean.medicamento.dosis}" />
+
+                    <p:commandButton type="button" value="Agregar medicamento" style="width: 100%; padding: 0.5rem; margin: 1rem 0" actionListener="#{medicamentoBean.agregarMedicamento()}" />
+                </p:panel> 
+
+                <p:panel style="display: grid; gap: 1rem"> 
+
+                    <ui:repeat value="#{medicamentoBean.listaMedicamentos}" var="medicamento">
+                        <p:panel>
+                            <h:outputLabel value="#{medicamento.codigo} - #{medicamento.nombre}" />
+
+                            <h:commandButton 
+                                class="btn_medicamento" 
+                                style="background: #{medicamento.forma == 'Capsula' ? '#0099ff' : 'yellow'}" 
+                                actionListener="#{medicamentoBean.agregarMedicamentosATabla(medicamento)}" 
+                                />
+                        </p:panel>
+                    </ui:repeat>
+
+                    <h4>Capsula</h4>
+
+                    <p:dataTable value="#{medicamentoBean.listaMedicamentosCapsula}" var="medCap">
+                        <p:column headerText="Codigo" class="#{medCap.viaConsumo == 'Oral' ? 'blue' : 'orange'}">
+                            <h:outputText value="#{medCap.codigo}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{medCap.nombre}" />
+                        </p:column>
+                        <p:column headerText="Forma">
+                            <h:outputText value="#{medCap.forma}" />
+                        </p:column>
+                        <p:column headerText="Fecha de caducidad">
+                            <h:outputText value="#{medCap.fechaCaducidad}" />
+                        </p:column>
+                        <p:column headerText="Via de consumo">
+                            <h:outputText value="#{medCap.viaConsumo}" />
+                        </p:column>
+                        <p:column headerText="Dosis">
+                            <h:outputText value="#{medCap.dosis}" />
+                        </p:column>
+                        <p:column headerText="Acción">
+                            <p:commandButton 
+                                type="button" 
+                                value="O" 
+                                />
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:divider />
+                    <p:divider />
+
+                    <h4>Jarabe</h4>
+
+                    <p:divider />
+
+                    <p:dataTable value="#{medicamentoBean.listaMedicamentosJarabe}" var="medJar">
+                        <p:column headerText="Codigo" class="#{medJar.viaConsumo == 'Oral' ? 'blue' : 'orange'}">
+                            <h:outputText value="#{medJar.codigo}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{medJar.nombre}" />
+                        </p:column>
+                        <p:column headerText="Forma">
+                            <h:outputText value="#{medJar.forma}" />
+                        </p:column>
+                        <p:column headerText="Fecha de caducidad">
+                            <h:outputText value="#{medJar.fechaCaducidad}" />
+                        </p:column>
+                        <p:column headerText="Via de consumo">
+                            <h:outputText value="#{medJar.viaConsumo}" />
+                        </p:column>
+                        <p:column headerText="Dosis">
+                            <h:outputText value="#{medJar.dosis}" />
+                        </p:column>
+                        <p:column headerText="Acción">
+                            <p:commandButton 
+                                type="button" 
+                                value="O" 
+                                actionListener="#{medicamentoBean.eliminarDeLaTabla(medJar)}"
+                                />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel> 
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
+<!--<>-->

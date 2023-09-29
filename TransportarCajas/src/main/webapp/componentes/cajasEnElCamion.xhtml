@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <h:body>
+        <div class="container_formulario gap-4 d-flex">
+
+            <ui:include src="./formularioModificarCajaSubirCamion.xhtml" />
+
+            <div class="container_inputs p-3">
+                <h2 class="titulo_formulario">Cajas en el camión</h2>
+
+                <div class="table-responsive">
+                    <h:dataTable class="table text-center" value="#{cajaBean.listCajasEnElCamion}" var="cajaEnCamion">
+                        <h:column>    				
+                            <f:facet name="header">Codigo</f:facet>   
+                                #{cajaEnCamion.codigo}
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name="header">Radicado de entrada</f:facet> 
+                                #{cajaEnCamion.radicado} 
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name="header">Fecha de entrada</f:facet> 
+                                #{cajaBean.mostrarFechaDeHoyCorta(cajaEnCamion.fechaEntrada)}   
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name="header">Hora de entrada</f:facet> 
+                                #{cajaEnCamion.horaSalida} 
+                        </h:column>
+                        <h:column>    	
+                            <f:facet name="header">Acción</f:facet>  
+                            <h:commandButton actionListener="#{cajaBean.bajaCajaDelCamion(cajaEnCamion)}" class="btn btn-outline-info" value="Bajar caja del camión" /> 				
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

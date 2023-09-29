@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            Gestor de Medicamentos
+
+            <p:panelGrid columns="2">
+                <p:panel>
+                    <p:panelGrid columns="2">
+                        <h:outputText value="codigo" />
+                        <p:inputText value="#{mediControl.medi.codigo}" />
+                        <h:outputText value="nombre" />
+                        <p:inputText value="#{mediControl.medi.nombre}" />
+                        <h:outputText value="forma" />
+                        <p:spinner value="#{mediControl.medi.forma}" />
+                        <h:outputText value="fecha de caducidad" />
+                        <p:spinner value="#{mediControl.medi.fechacaducidad}" min="2015" max="2024" />
+                        <h:outputText value="via de consumo" />
+                        <p:spinner value="#{mediControl.medi.vconsumo}" />
+                        <h:outputText value="dosis" />
+                        <p:spinner value="#{mediControl.medi.dosis}" min="1.2" max="1.080"/>
+                    </p:panelGrid>
+                    <h:commandButton value="agregar" action="#{mediControl.agregar()}" />
+                </p:panel>
+                <p:panelGrid columns="1">
+                    <p:dataTable var="m1" value="#{mediControl.med}">
+                        <p:column headerText="codigo">
+                            #{m1.codigo}
+                        </p:column>
+                        <p:column headerText="nombre">
+                            #{m1.nombre}
+                        </p:column>
+                        <p:column headerText="forma">
+                            #{m1.forma}
+                        </p:column>
+                        <p:column headerText="fecha de caducidad">
+                            #{m1.fechacaducidad}
+                        </p:column>
+                        <p:column headerText="via de consumo">
+                            <h:outputText value="#{m1.vconsumo}" style="background: #{m1.vconsumo()}" />
+                        </p:column>
+                        <p:column headerText="Opciones">
+                            <h:commandButton value="a" action="#{mediControl.alquilar(m1)}" />
+                            <h:commandButton value="o" action="#{mediControl.colocaroral(m1)}" />
+                            <h:commandButton value="e" action="#{mediControl.colocarexterno(m1)}" />
+                        </p:column>
+                    </p:dataTable>
+                    <p:dataTable var="m2" value="#{mediControl.medis}">
+                        <p:column headerText="codigo">
+                            #{m2.placa}
+                        </p:column>
+
+
+                        <p:column>
+                        #{m2.nombre}
+                        </p:column>
+                        <p:column headerText="forma">
+                            #{m2.forma}
+                        </p:column>
+                        <p:column headerText="fecha de caducidad">
+                            #{m2.fechacaducidad}
+                        </p:column>
+                        <p:column headerText="Opciones">
+                            <h:commandButton value="##" action="#{mediControl.devolver(m2)}" />
+                        </p:column>
+                    </p:dataTable>
+
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:growl/>
+        </h:form>
+    </h:body>
+</html>

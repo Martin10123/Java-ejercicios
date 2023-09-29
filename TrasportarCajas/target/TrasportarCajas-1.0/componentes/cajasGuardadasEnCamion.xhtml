@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:dataTable value="#{cajaBean.pilaCajasEnCamion}" var="cajaGuardadasCamion">
+            <p:column headerText="Codigo">
+                <h:outputText value="#{cajaGuardadasCamion.codigo}" />
+            </p:column>
+
+            <p:column headerText="Altura">
+                <h:outputText value="#{cajaGuardadasCamion.altura}" />
+            </p:column>
+
+            <p:column headerText="Peso">
+                <h:outputText value="#{cajaGuardadasCamion.peso}" />
+            </p:column>
+
+            <p:column headerText="Ancho">
+                <h:outputText value="#{cajaGuardadasCamion.ancho}" />
+            </p:column>
+
+            <p:column headerText="Radicado">
+                <h:outputText value="#{cajaGuardadasCamion.radicado}" />
+            </p:column>
+
+            <p:column headerText="Fecha">
+                <h:outputText value="#{cajaGuardadasCamion.fechaEntrada}" />
+            </p:column>
+
+            <p:column headerText="Hora">
+                <h:outputText value="#{cajaGuardadasCamion.horaSalida}" />
+            </p:column>
+
+            <p:column headerText="Estado">
+                <h:outputText value="#{cajaGuardadasCamion.estado}" />
+            </p:column>
+
+            <p:column headerText="Acción">
+                <h:commandButton class="boton" style="font-size: 0.9rem" value="Inspeccionar caja" actionListener="#{cajaBean.dividirCajasSegunEstado()}" />
+            </p:column>
+
+        </p:dataTable> 
+    </h:body>
+</html>

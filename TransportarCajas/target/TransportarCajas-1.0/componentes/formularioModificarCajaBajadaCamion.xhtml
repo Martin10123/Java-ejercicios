@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <div class="container_inputs p-3">
+
+            <h2 class="titulo_formulario">Modificar caja seleccionada</h2>
+
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Radicado de salida" /> 
+                <h:inputText disabled="true" class="form-control" value="#{cajaBean.cajaDividirSegunEstado.radicado}S" /> 
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Fecha de salida" />  
+                <p:calendar class="form-control" placeholder="2023-06-12"
+                            value="#{cajaBean.cajaDividirSegunEstado.fechaSalida}" 
+                            pattern="yyyy-MM-dd" showOn="button" 
+                            />
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Hora de salida" />  
+                <h:inputText disabled="true" class="form-control" value="#{cajaBean.obtenerHoraActual()}" />
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Estado de la caja" />  
+                <h:selectOneMenu class="form-select" id="selectEstado" value="#{cajaBean.cajaDividirSegunEstado.estado}" onchange="mostrarOcultarDiv()">
+                    <f:selectItem itemLabel="Con anomalias" itemValue="Con anomalias"/>
+                    <f:selectItem itemLabel="Normal" itemValue="Normal"/>
+                    <f:selectItem itemLabel="Dañada" itemValue="Dañada"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="mb-3" id="divID" style="display: #{cajaBean.cajaDividirSegunEstado.estado == 'Normal' ? 'block' : 'none'}">
+                <h:outputLabel class="form-label" value="ID Etiqueta" /> 
+                <h:inputText class="form-control" value="#{cajaBean.etiqueta.id}" type="number" /> 
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Descripción" />  
+                <h:inputTextarea class="form-control textarea" value="#{cajaBean.etiqueta.descripcion}" />  
+            </div>
+            <div class="mb-3">
+                <h:commandButton actionListener="#{cajaBean.dividirCajasSegunEstado()}" class="btn btn-outline-primary" style="width: 100%" value="Agregar caja" />
+            </div>
+
+        </div>
+    </h:body>
+    
+      <script>
+        function mostrarOcultarDiv() {
+            const selectEstado = document.getElementById("selectEstado");
+            console.log(selectEstado);
+            console.log("selectEstado");
+        }
+    </script>
+</html>

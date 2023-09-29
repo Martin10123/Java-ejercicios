@@ -1,0 +1,3 @@
+com\modelo\Medicamento.class
+com\controller\MediControl.class
+com\controller\FacesUtil.class

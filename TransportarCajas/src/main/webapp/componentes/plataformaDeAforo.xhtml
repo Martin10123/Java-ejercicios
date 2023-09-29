@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <h:body>
+        <div class="container_formulario gap-4 d-flex">
+            <div class="row container_inputs p-3">
+
+                <div class="table-responsive">
+                    <h2 class="titulo_formulario">Plataforma de aforo</h2>
+
+                    <h:dataTable class="table text-center" value="#{cajaBean.listaCajasPlataformaAforo}" var="cajaEnPlaAforo">
+                        <h:column>    				
+                            <f:facet name="header">Codigo</f:facet>   
+                                #{cajaEnPlaAforo.codigo}
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name="header">Radicado de entrada</f:facet> 
+                                #{cajaEnPlaAforo.radicado} 
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name="header">Fecha de entrada</f:facet> 
+                                #{cajaBean.mostrarFechaDeHoyCorta(cajaEnPlaAforo.fechaEntrada)}   
+                        </h:column>
+                        <h:column>    				
+                            <f:facet name="header">Hora de entrada</f:facet> 
+                                #{cajaEnPlaAforo.horaSalida} 
+                        </h:column>
+                        <h:column>    	
+                            <f:facet name="header">Acción</f:facet>  
+                            <h:commandButton actionListener="#{cajaBean.elegirCajaDePlataformaAforo(cajaEnPlaAforo)}" class="btn btn-outline-info" value="Separar caja" /> 				
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </div>
+
+            <ui:include src="./formularioModificarCajaBajadaCamion.xhtml" />
+        </div>
+    </h:body>
+</html>

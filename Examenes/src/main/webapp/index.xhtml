@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Examenes</title>
+        <style>
+            .boton {
+                height: 3.5rem;
+                border-radius: 0.5rem;
+                background: #0099ff;
+                font-size: 1.1rem;
+                color: #fff;
+                border: none;
+                box-shadow: 1px 1px 6px #80808094;
+                cursor: pointer;
+                width: 100%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+
+            <p:panelGrid columns="2">
+
+                <p:panel header="Crear nuevo examen">
+                    <h3>Codigo del examen</h3>
+                    <p:inputText placeholder="123456789..." style="width: 100%" value="#{examenBean.nuevoExamen.codigo}" />
+
+                    <h3>Numero de preguntas del examen</h3>
+                    <p:inputText type="number" placeholder="Examen x..." style="width: 100%" value="#{examenBean.nuevoExamen.numeroPreguntas}" />
+
+                    <div style="margin: 2rem 0">
+                        <h:commandButton class="boton" value="Agregar examen" actionListener="#{examenBean.aceptarExamen()}" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Examen Creado">
+                    <p:panel header="Codigo del examen">
+                        <h4>#{examenBean.nuevoExamenCreado.codigo}</h4>
+                    </p:panel>
+
+                    <p:panel header="Número de preguntas del examen">
+                        <h4>#{examenBean.nuevoExamenCreado.numeroPreguntas} preguntas</h4>
+                    </p:panel>
+                </p:panel>
+
+            </p:panelGrid>
+
+            <p:panelGrid columns="2">
+
+
+                <p:panel header="Entregar examen">
+                    <h3>Codigo del estudiante</h3>
+                    <p:inputText placeholder="123456789..." style="width: 100%" value="#{examenBean.nuevoExamenEstudiante.codigo}" />
+
+                    <h3>Nombre del estudiante</h3>
+                    <p:inputText placeholder="Pedro castro..." style="width: 100%" value="#{examenBean.nuevoExamenEstudiante.nombreEstudiante}" />
+
+                    <div style="margin: 2rem 0">
+                        <h:commandButton class="boton"  value="Entregar examen" actionListener="#{examenBean.entregarExamen()}" />
+                    </div>
+                </p:panel>
+
+
+                <p:panel header="Examenes entregados">
+                    <p:dataTable value="#{examenBean.listExamenesEntregados}" var="examenEntregado">
+                        <p:column headerText="Codigo del examen">
+                            <h:outputText value="#{examenEntregado.codigo}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre del estudiantes">
+                            <h:outputText value="#{examenEntregado.nombreEstudiante}" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <div style="margin: 2rem 0">
+                        <h:commandButton class="boton"  value="Seleccionar examen" actionListener="#{examenBean.escogerUltimoExamenDeLaPila()}" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Entregar examen">
+                    <h3>Examen de: </h3> <p>#{examenBean.nuevoExamenEstudianteACalificar.nombreEstudiante}</p>
+                    <h3>Codigo: </h3> <p>#{examenBean.nuevoExamenEstudianteACalificar.codigo}</p>
+
+                    <p:knob min="0" max="#{examenBean.nuevoExamenCreado.numeroPreguntas}" value="#{examenBean.nuevoExamenEstudianteACalificar.preguntasBuenas}" />
+
+                    <div style="margin: 2rem 0">
+                        <h:commandButton class="boton"  value="Entregar examen" actionListener="#{examenBean.entregarExamencalificado()}" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Examenes calificados">
+                    <p:dataTable value="#{examenBean.listaExamenesCalificados}" var="examenCalificado">
+                        <p:column headerText="Nombre del estudiante">
+                            <h:outputText value="#{examenCalificado.nombreEstudiante}" />
+                        </p:column>
+
+                        <p:column headerText="Codigo del estudiante">
+                            <h:outputText value="#{examenCalificado.codigo}" />
+                        </p:column>
+
+                        <p:column headerText="Preguntas buenas">
+                            <h:outputText value="#{examenCalificado.preguntasBuenas}" />
+                        </p:column>
+
+                        <p:column headerText="Nota">
+                            <h:outputText value="#{examenCalificado.notaExamen}" />
+                        </p:column>
+                        
+                         <p:column headerText="Estado">
+                             <h:outputText value="#{examenCalificado.estado}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+            </p:panelGrid>
+
+
+        </h:form>
+    </h:body>
+</html>

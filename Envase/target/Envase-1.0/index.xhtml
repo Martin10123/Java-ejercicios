@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <h:outputStylesheet name="styles.css"/>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+
+            <p:panelGrid columns="2">
+                <p:panel header="Agregar nuevo envase">
+                    <div class="formulario">
+                        <div class="input">
+                            <h3>Tipo</h3>
+                            <p:selectOneMenu value="#{envaseBean.envase.tipo}" >
+                                <f:selectItem itemLabel="A" itemValue="A"/>
+                                <f:selectItem itemLabel="B" itemValue="B"/>
+                                <f:selectItem itemLabel="C" itemValue="C"/>
+                            </p:selectOneMenu>
+                        </div>
+
+                        <div class="input">
+                            <h3>Color</h3>
+                            <p:inputText placeholder="Rojo..." value="#{envaseBean.envase.color}" />
+                        </div>
+
+                        <div class="input">
+                            <h3>Tamaño</h3>
+                            <p:inputText type="number" placeholder="6, 8, 12..." value="#{envaseBean.envase.tamanio}" />
+                        </div>
+
+                        <div class="input">
+                            <h:commandButton actionListener="#{envaseBean.agregarNuevoEnvase()}" class="button" value="Agregar envase" />
+                        </div>
+                    </div>
+                </p:panel>
+
+                <p:panel header="Envases estandarizados">
+                    <p:dataTable var="envaseOk" value="#{envaseBean.listaEnvasesEstandarizados}">
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{envaseOk.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{envaseOk.estado}" />
+                        </p:column>
+
+                        <p:column headerText="Tamaño">
+                            <h:outputText value="#{envaseOk.tamanio}"/>
+                        </p:column>
+
+                        <p:column headerText="Color">
+                            <h:outputText value="#{envaseOk.color}" />
+                        </p:column>
+
+                        <p:column headerText="Terminar">
+                            <h:commandButton actionListener="#{envaseBean.terminarEnvaseEstandarizado(envaseOk)}" class="button" value="Terminar" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+                <p:panel header="Pila de envases sin estandarizar">
+                    <p:dataTable var="envaseNoEstandarizados" value="#{envaseBean.pilaEnvasesSinEstadarizar}">
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{envaseNoEstandarizados.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{envaseNoEstandarizados.estado}" />
+                        </p:column>
+
+                        <p:column headerText="Tamaño">
+                            <h:outputText value="#{envaseNoEstandarizados.tamanio}"/>
+                        </p:column>
+
+                        <p:column headerText="Color">
+                            <h:outputText value="#{envaseNoEstandarizados.color}" />
+                        </p:column>
+
+
+                    </p:dataTable>
+
+                    <div class="contiene_boton">
+                        <h:commandButton actionListener="#{envaseBean.elegirEnvaseNoEstandarizado()}" class="button" value="Terminar envase" />
+                    </div>
+                </p:panel>
+
+                <p:panel header="Estandarizar envase">
+                    <div class="formulario">
+
+                        <div class="input">
+                            <p><b>TIPO: </b>#{envaseBean.envaseAEstandarizar.tipo}</p>
+                            <p><b>ESTADO: </b>#{envaseBean.envaseAEstandarizar.estado}</p>
+                            <p><b>TAMAÑO: </b>#{envaseBean.envaseAEstandarizar.tamanio}</p>
+                            <p><b>COLOR: </b>#{envaseBean.envaseAEstandarizar.color}</p>
+                        </div>
+
+                        <hr />
+
+                        <div class="input">
+                            <h3>Tamaño</h3>
+                            <p:inputText placeholder="6, 8, 12..." value="#{envaseBean.envaseAEstandarizar.tamanio}" />
+                        </div>
+
+                        <div class="contiene_boton">
+                            <h:commandButton actionListener="#{envaseBean.moverEnvaseALaListaDeEstandarizados()}" class="button" value="Estandarizar envase" />
+                        </div>
+                    </div>
+                </p:panel>
+
+                <p:panel header="Envases terminados">
+                    <p:dataTable var="envaseTerminados" value="#{envaseBean.listaEnvasesTerminados}">
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{envaseTerminados.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{envaseTerminados.estado}" />
+                        </p:column>
+
+                        <p:column headerText="Tamaño">
+                            <h:outputText value="#{envaseTerminados.tamanio}"/>
+                        </p:column>
+
+                        <p:column headerText="Color">
+                            <h:outputText value="#{envaseTerminados.color}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+            </p:panelGrid>
+
+        </h:form>
+
+        <p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+    </h:body>
+</html>

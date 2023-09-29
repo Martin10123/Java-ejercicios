@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <h:head>
+    </h:head>
+    <h:body>
+        <div class="container_formulario gap-4 d-flex">
+
+            <ui:include src="./formularioAgregarCajas.xhtml" />
+
+            <div class="container_inputs p-3">
+                <h2 class="titulo_formulario">Plataforma de distribución de cajas</h2>
+
+                <h:dataTable class="table text-center" value="#{cajaBean.listaCajasPlataformaDistribucion}" var="cajaDeDistribucion">
+                    <h:column>    				
+                        <f:facet name="header">Codigo</f:facet>    
+                            #{cajaDeDistribucion.codigo}
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Altura</f:facet> 
+                            #{cajaDeDistribucion.altura}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Peso</f:facet>  
+                            #{cajaDeDistribucion.peso}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Ancho</f:facet>   
+                            #{cajaDeDistribucion.ancho}                        
+                    </h:column>
+                </h:dataTable>
+
+                <div class="mb-3 d-flex justify-content-md-end">
+                    <h:commandButton 
+                        actionListener="#{cajaBean.seleccionarCajaDePlataformaDistribucion()}"
+                        class="btn btn-outline-info" 
+                        value="Subir caja a camión" 
+                        />
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

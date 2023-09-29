@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <title>Formulario modificar camión</title>
+    </h:head>
+    <h:body>
+        <h5>Radicado</h5>
+        <p:inputText placeholder="1029301..." style="width: 100%" value="#{cajaBean.cajaSeleccionadaPlataforma.radicado}" />
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div>
+                <h5>Fecha de entrada</h5>
+                <p:calendar placeholder="2023-06-12"
+                            value="#{cajaBean.cajaSeleccionadaPlataforma.fechaEntrada}" 
+                            pattern="yyyy-MM-dd" showOn="button" 
+                            />
+            </div>
+            <div>
+                <h5>Fecha de salida</h5>
+                <p:calendar placeholder="2023-06-12"
+                            value="#{cajaBean.cajaSeleccionadaPlataforma.fechaSalida}" 
+                            pattern="yyyy-MM-dd" showOn="button"
+                            />
+            </div>
+        </div>
+
+        <h5>Hora</h5>
+        <p:inputText disabled="true" style="width: 100%" value="#{cajaBean.obtenerHoraActual()}" />
+        <h5>Estado de la caja</h5>
+        <p:selectOneMenu required="true" style="width: 100%" value="#{cajaBean.cajaSeleccionadaPlataforma.estado}">
+            <f:selectItem itemLabel="Con anomalias" itemValue="Con anomalias"/>
+            <f:selectItem itemLabel="Normal" itemValue="Normal"/>
+            <f:selectItem itemLabel="Dañada" itemValue="Dañada"/>
+        </p:selectOneMenu>
+
+        <h:commandButton class="boton" value="Guardar caja en camión" actionListener="#{cajaBean.suministrarInfoAdicionalCaja()}" />
+    </h:body>
+</html>

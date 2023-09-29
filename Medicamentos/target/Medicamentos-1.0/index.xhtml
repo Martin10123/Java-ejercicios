@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <link rel="stylesheet" href="./styles.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+
+        <title>Medicamentos</title>
+    </h:head>
+    <h:body>
+        
+        <p:panelGrid columns="2">
+            <p:panel>
+                hola mundo
+            </p:panel>
+        </p:panelGrid>
+        
+        <h:form>
+            <div class="container_form">
+                <div class="container_medicamentos">
+                    <h:outputLabel class="titulo_todos_medicamentos" value="Todos los medicamentos" />
+
+                    <ui:repeat value="#{medicamentoBean.listaMedicamentos}" var="medicamento">
+                        <div class="nombre_medicamentos">
+                            <h:outputLabel value="#{medicamento.codigo} - #{medicamento.nombre}" />
+
+                            <h:commandButton 
+                                class="btn_medicamento" 
+                                style="background: #{medicamento.forma == 'Capsula' ? '#0099ff' : 'yellow'}" 
+                                actionListener="#{medicamentoBean.agregarMedicamentosATabla(medicamento)}" 
+                                />
+                        </div>
+                    </ui:repeat>
+                </div>
+
+
+                <div class="dividir_tablas">
+                    <h:dataTable class="table table-striped table-hover" value="#{medicamentoBean.listaMedicamentosCapsula}" var="medCap" >
+
+                        <h:column class="#{medCap.viaConsumo == 'Oral' ? 'blue' : 'orange'}">  
+                            <f:facet name="header">Codigo</f:facet>  
+                                #{medCap.codigo}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Nombre</f:facet>  
+                                #{medCap.nombre}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Forma</f:facet>  
+                                #{medCap.forma}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Fecha de caducidad</f:facet>  
+                                #{medCap.fechaCaducidad}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Via de consumo</f:facet>  
+                                #{medCap.viaConsumo}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Dosis</f:facet>  
+                                #{medCap.dosis}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Acción</f:facet>  
+                            <h:commandButton class="btn_tabla" value="##" actionListener="#{medicamentoBean.eliminarDeLaTabla(medCap)}" />
+                        </h:column>  
+
+                    </h:dataTable>
+
+                    <h:dataTable class="table table-striped table-hover" value="#{medicamentoBean.listaMedicamentosJarabe}" var="medJar">
+
+                        <h:column class="#{medJar.viaConsumo == 'Oral' ? 'blue' : 'orange'}">  
+                            <f:facet name="header">Codigo</f:facet>  
+                                #{medJar.codigo}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Nombre</f:facet>  
+                                #{medJar.nombre}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Forma</f:facet>  
+                                #{medJar.forma}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Fecha de caducidad</f:facet>  
+                                #{medJar.fechaCaducidad}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Via de consumo</f:facet>  
+                                #{medJar.viaConsumo}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Dosis</f:facet>  
+                                #{medJar.dosis}
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">Acción</f:facet>  
+                            <h:commandButton class="btn_tabla" value="##" actionListener="#{medicamentoBean.eliminarDeLaTabla(medJar)}" />
+                        </h:column>  
+
+                    </h:dataTable>
+
+                </div>
+
+                <!-- Parte del modal -->
+
+                <h:commandButton class="btn btn-outline-primary btn_flotante" value="Agregar medicamento" type="button" onclick="abrirModal();"  />
+
+                <!--<ui:include src="newjsf.xhtml" />-->
+
+                <div id="miModal" class="modal modal_medicamentos">
+                    <div class="modal_contenido">
+                        <div class="crear_medicamento">
+                            <h:outputLabel value="Crear un nuevo medicamento" />
+                        </div>
+
+                        <div class="container_formulario">
+                            <div>
+                                <h:outputLabel class="form-label" value="Codigo" for="codigo" />
+                                <h:inputText class="form-control" required="true" type="number" value="#{medicamentoBean.medicamento.codigo}" id="codigo" />
+                            </div>
+                            <div>
+                                <h:outputLabel class="form-label" value="Nombre" for="nombre" />
+                                <h:inputText class="form-control" required="true" type="text"  id="nombre" value="#{medicamentoBean.medicamento.nombre}" />
+                            </div>
+
+                            <div>
+                                <h:outputLabel class="form-label" value="Fecha de caducidad" for="caducidad" />
+                                <h:inputText class="form-control" required="true" type="date" id="caducidad" value="#{medicamentoBean.medicamento.fechaCaducidad}" />
+                            </div>
+
+                            <div class="separar_selects">
+                                <div>
+                                    <h:outputLabel class="form-label" value="Forma" for="select_forma" />
+                                    <h:selectOneMenu class="form-select" required="true" id="select_forma" value="#{medicamentoBean.medicamento.forma}">
+                                        <f:selectItem itemValue="Capsula" itemLabel="Capsula" />
+                                        <f:selectItem itemValue="Liquido" itemLabel="Liquido" />
+                                    </h:selectOneMenu>
+                                </div>
+
+                                <div>
+                                    <h:outputLabel class="form-label" value="Via de consumo" for="consumo" />
+                                    <h:selectOneMenu class="form-select" id="consumo" value="#{medicamentoBean.medicamento.viaConsumo}">
+                                        <f:selectItem itemValue="Oral" itemLabel="Oral" />
+                                        <f:selectItem itemValue="Externo" itemLabel="Externo" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h:outputLabel class="form-label" value="Dosis" for="dosis"  />
+                                <h:inputText class="form-control" required="true" type="number" id="dosis"  value="#{medicamentoBean.medicamento.dosis}" />
+                            </div>
+
+
+                            <div class="contiene_botones">
+                                <h:commandButton class="btn btn-outline-primary" value="Guardar" actionListener="#{medicamentoBean.agregarMedicamento()}" />
+                                <h:commandButton class="btn btn-outline-danger" value="Cancelar" type="button" onclick="cerrarModal();"  />
+                            </div>
+
+                        </div> 
+                    </div>
+                </div>
+
+            </div>
+        </h:form>
+
+        <script>
+            function abrirModal() {
+                document.getElementById('miModal').style.display = 'flex';
+            }
+
+            function cerrarModal() {
+                document.getElementById('miModal').style.display = 'none';
+            }
+        </script>
+    </h:body>
+</html>

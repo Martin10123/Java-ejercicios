@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cajas dañadas</title>
+    </h:head>
+    <h:body>
+        <h3>Cajas dañadas</h3>
+
+        <p:dataTable value="#{cajaBean.listaCajasDanadas}" var="cajaCanada">
+
+            <p:column headerText="Radicado">
+                <h:outputText value="#{cajaCanada.radicado}s" />
+            </p:column>
+
+            <p:column headerText="Codigo">
+                <h:outputText value="#{cajaCanada.codigo}" />
+            </p:column>
+
+            <p:column headerText="Altura">
+                <h:outputText value="#{cajaCanada.altura}" />
+            </p:column>
+
+            <p:column headerText="Peso">
+                <h:outputText value="#{cajaCanada.peso}" />
+            </p:column>
+
+            <p:column headerText="Ancho">
+                <h:outputText value="#{cajaCanada.ancho}" />
+            </p:column>
+
+            <p:column headerText="Fecha entrada">
+                <h:outputText value="#{cajaCanada.fechaEntrada}" />
+            </p:column>
+
+            <p:column headerText="Fecha salida">
+                <h:outputText value="#{cajaCanada.fechaSalida}" />
+            </p:column>
+
+            <p:column headerText="Estado">
+                <h:outputText value="#{cajaCanada.estado}" />
+            </p:column>
+
+            <p:column headerText="ID">
+                <h:outputText value="#{cajaCanada.etiqueta.id}" />
+            </p:column>
+
+            <p:column headerText="Descripción">
+                <h:outputText value="#{cajaCanada.etiqueta.descripcion}" />
+            </p:column>
+
+            <p:column headerText="Color">
+                <h:outputText value="#{cajaCanada.etiqueta.color}" />
+            </p:column>
+
+        </p:dataTable> 
+    </h:body>
+</html>

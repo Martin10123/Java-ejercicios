@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+    <h:body>
+        <div class="container_inputs p-3" style="width: 100%">
+            <h2 class="titulo_formulario">Cajas dañadas</h2>
+
+            <div class="table-responsive">
+                <h:dataTable class="table text-center" value="#{cajaBean.listaCajasDanadas}" var="cajaDaniada">
+                    <h:column>    				
+                        <f:facet name="header">Codigo</f:facet>    	
+                            #{cajaDaniada.codigo}
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Altura</f:facet>    
+                            #{cajaDaniada.altura}
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Peso</f:facet>  
+                            #{cajaDaniada.peso}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Ancho</f:facet>  
+                            #{cajaDaniada.ancho}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Radicado de entrada</f:facet>  
+                            #{cajaDaniada.radicado}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Fecha de entrada</f:facet>  
+                            #{cajaBean.mostrarFechaDeHoyCorta(cajaDaniada.fechaEntrada)}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Radicado de salida</f:facet>  
+                            #{cajaDaniada.radicado}S                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Fecha de salida</f:facet>  
+                            #{cajaBean.mostrarFechaDeHoyCorta(cajaDaniada.fechaSalida)}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Hora de salida</f:facet>  
+                            #{cajaDaniada.horaSalida}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">ID</f:facet>  
+                            #{cajaDaniada.etiqueta.id}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Descripción</f:facet>  
+                            #{cajaDaniada.etiqueta.descripcion}                        
+                    </h:column>
+                    <h:column>    				
+                        <f:facet name="header">Color</f:facet>  
+                            #{cajaDaniada.etiqueta.color}                        
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+    </h:body>
+</html>

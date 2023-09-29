@@ -1,0 +1,88 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.form:before {
+    content: "";
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-image: linear-gradient(to bottom, #0099ff, #84aeff, #bac6fe, #e1e1fe, #ffffff);
+}
+
+.titulo_llantas {
+    font-size: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: #fff
+}
+
+body .ui-panelgrid .ui-panelgrid-cell {
+    background: transparent !important;
+}
+
+body .ui-panel .ui-panel-content {
+    background: #fff;
+    border: none;
+}
+
+body .ui-panel .ui-panel-titlebar {
+    background: #fff;
+    border: none;
+    border-bottom: 1px solid #3D1797;
+    color: #000;
+    font-size: 1.5rem;
+}
+
+.contiene_input {
+    display: grid;
+    gap: 1rem;
+    margin: 0 0 1rem 0;
+}
+
+.boton {
+    height: 3rem;
+    width: 100%;
+    background: #0093ff;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    font-size: 1.1rem;
+    border-radius: 0.3rem;
+    margin: 1rem 0 0;
+}
+
+body .ui-panel {
+    box-shadow: 1px 1px 6px #808080a3;
+    border-radius: 0.6rem;
+}
+
+.ui-outputlabel-label {
+    color: #000
+}
+
+.contiene_boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 0 0;
+}
+
+.mostrar_caja_seleccionada {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid gray;
+    margin-bottom: 1rem;
+}
+
+.ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield {
+    width: 100%
+}

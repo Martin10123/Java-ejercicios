@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <div class="row container_inputs p-3">
+            <h2 class="titulo_formulario">Modificar caja seleccionada</h2>
+
+            <div class="container_caja_seleccionada">
+                <div>
+                    <h3>Codigo:</h3>
+                    <p>#{cajaBean.cajaAModificarParaSubirAlCamion.codigo}</p>
+                </div>
+                <div>
+                    <h3>Altura:</h3>
+                    <p>#{cajaBean.cajaAModificarParaSubirAlCamion.altura}</p>
+                </div>
+                <div>
+                    <h3>Peso:</h3>
+                    <p>#{cajaBean.cajaAModificarParaSubirAlCamion.peso}</p>
+                </div>
+                <div>
+                    <h3>Ancho:</h3>
+                    <p>#{cajaBean.cajaAModificarParaSubirAlCamion.ancho}</p>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Radicado" />
+                <h:inputText class="form-control" value="#{cajaBean.cajaAModificarParaSubirAlCamion.radicado}" />
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Fecha de entrada" />  
+                <p:calendar class="form-control" placeholder="2023-06-12"
+                            value="#{cajaBean.cajaAModificarParaSubirAlCamion.fechaEntrada}" 
+                            pattern="yyyy-MM-dd" showOn="button" 
+                            />
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Hora de entrada" /> 
+                <h:inputText disabled="true" class="form-control" value="#{cajaBean.obtenerHoraActual()}" />
+            </div>
+            <div class="mb-3">
+                <h:commandButton class="btn btn-outline-primary" style="width: 100%" value="Modificar caja" actionListener="#{cajaBean.subirCajaModificadaAlCamion()}" />
+            </div>
+
+        </div>
+    </h:body>
+</html>

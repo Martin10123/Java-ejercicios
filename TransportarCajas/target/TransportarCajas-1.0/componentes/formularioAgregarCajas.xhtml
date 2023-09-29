@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+    <h:body>
+        <div class="row container_inputs">
+            <h2 class="titulo_formulario">Agregar nueva caja</h2>
+
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Codigo" /> 
+                <h:inputText autocomplete="off" class="form-control" value="#{cajaBean.caja.codigo}" /> 
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Altura" />  
+                <h:inputText autocomplete="off"  class="form-control" type="number" value="#{cajaBean.caja.altura}" /> 
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Peso" />  
+                <h:inputText autocomplete="off" class="form-control" type="number" value="#{cajaBean.caja.peso}" /> 
+            </div>
+            <div class="mb-3">
+                <h:outputLabel class="form-label" value="Ancho" />
+                <h:inputText autocomplete="off" class="form-control" type="number" value="#{cajaBean.caja.ancho}" /> 
+            </div>
+            <div class="mb-3">
+                <h:commandButton actionListener="#{cajaBean.agregarCajaAPlataformaDistribucion()}" class="btn btn-outline-primary" style="width: 100%" value="Agregar caja" />
+            </div>
+        </div>
+    </h:body>
+</html>

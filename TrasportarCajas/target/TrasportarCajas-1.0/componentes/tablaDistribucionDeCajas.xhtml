@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Transportar cajas</title>
+    </h:head>
+    <h:body>
+        <p:dataTable value="#{cajaBean.listaCajasPlataforma}" var="cajaPlataforma">
+            <p:column headerText="Codigo">
+                <h:outputText value="#{cajaPlataforma.codigo}" />
+            </p:column>
+
+            <p:column headerText="Altura">
+                <h:outputText value="#{cajaPlataforma.altura}" />
+            </p:column>
+
+            <p:column headerText="Peso">
+                <h:outputText value="#{cajaPlataforma.peso}" />
+            </p:column>
+
+            <p:column headerText="Ancho">
+                <h:outputText value="#{cajaPlataforma.ancho}" />
+            </p:column>
+        </p:dataTable>
+
+        <h:commandButton class="boton" value="Seleccionar caja" actionListener="#{cajaBean.seleccionarCajaDePlataforma()}" />
+    </h:body>
+</html>

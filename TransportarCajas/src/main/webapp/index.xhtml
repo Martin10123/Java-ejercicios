@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Transporte de cajas</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    </h:head>
+    <h:body>
+        <h:form class="container form_mayor p-4">
+
+            <h1>Parcial de transporte de cajas</h1>
+
+            <ui:include src="./componentes/plataformaDistribucionCajas.xhtml" />
+
+            <!--Separador-->
+
+            <ui:include src="./componentes/cajasEnElCamion.xhtml" />
+
+            <!--Separador-->
+
+            <ui:include src="./componentes/plataformaDeAforo.xhtml" />
+
+            <!--Separador-->
+
+            <div class="container_tablas_estado_cajas">
+
+                <ui:include src="./componentes/cajasConAnomalias.xhtml" />
+                <ui:include src="./componentes/cajasNormales.xhtml" />
+                <ui:include src="./componentes/cajasDaniadas.xhtml" />
+
+            </div>
+
+        </h:form>
+
+        <p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+    </h:body>
+</html>

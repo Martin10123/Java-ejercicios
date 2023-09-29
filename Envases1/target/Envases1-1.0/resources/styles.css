@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.formulario, .input {
+    display: grid;
+    gap: 1rem;
+}
+
+.button {
+    background-color: #0099ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+}
+
+.contiene_boton {
+    margin: 1rem 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
